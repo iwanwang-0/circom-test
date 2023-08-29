@@ -18,9 +18,20 @@ describe("Simple test", function () {
 
     it("Checking the compilation of a simple circuit generating wasm", async function () {
         const circuit = await wasm_tester(path.join(__dirname, "Multiplier2.circom"));
-        const w = await circuit.calculateWitness({a: 3, b: 4});
+        const w = await circuit.calculateWitness({a: "6", b: 5});
         await circuit.checkConstraints(w);
 
         console.log(w);
     });
+
+    it("check bitify a number", function() {
+        const a = 1053;
+        const bitStr = a.toString(2);
+        let bitArr = bitStr.split("");
+        bitArr = bitArr.map((x) => {
+            return parseInt(x);
+        });
+        console.log(bitStr);
+        console.log(bitArr);
+    })
 });
