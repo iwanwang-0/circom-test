@@ -83,5 +83,13 @@ describe("Bitify", function() {
 
         byteArr = bytifyBigIntLE(19915462992998069323040706974537250874160306099366236530173408288201213652137n, 32);
         console.log(byteArr);
+
+        byteArr = bytifyBigIntLE(BigInt("0x61caad4bb844cefed5f4f3718a29ea78506ad02aa2e8a56e34504e2e0cd9fa90"), 32);
+        console.log(byteArr);
+        
+        byteArr = byteArr.map((x) => {
+            return x.toString(16);
+        });
+        console.log(byteArr);
     })
 });

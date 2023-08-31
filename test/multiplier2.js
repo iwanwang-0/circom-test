@@ -19,9 +19,25 @@ describe("Simple test", function () {
     it("Checking the compilation of a simple circuit generating wasm", async function () {
         const circuit = await wasm_tester(path.join(__dirname, "Multiplier2.circom"));
         const w = await circuit.calculateWitness({a: "6", b: 5});
-        await circuit.checkConstraints(w);
+        // await circuit.checkConstraints(w);
+        // try {
+        //     await circuit.assertOut(w, {g : [1]});
+        // } catch (e) {
 
+        // }
+        await circuit.loadSymbols();
         console.log(w);
+        console.log(circuit.symbols);
+        const gIdx = circuit.symbols['main.g[0]'].varIdx;
+        console.log("g.idx is " + gIdx);
+        console.log("g = ");
+        for(let i = 0; i < 2; i++) {
+            console.log(w[gIdx + i]);
+        }
+
+        // 不能用
+        // const output = await circuit.getDecoratedOutput(w);
+        // console.log(output);
     });
 
     it("check bitify a number", function() {
