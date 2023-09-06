@@ -1,6 +1,8 @@
 const chai = require("chai");
 const path = require("path");
 
+const ethers = require('ethers');
+
 const wasm_tester = require("circom_tester").wasm;
 const c_tester = require("circom_tester").c;
 
@@ -18,6 +20,8 @@ function bytifyLE32(num) {
     for (const value of buf.values()) {
         byteArr.push(value);
     }
+    // const json1 = buf.toJSON().data;
+    // const json2 = JSON.stringify(buf);
     return byteArr;
 }
 
@@ -86,6 +90,10 @@ describe("Bitify", function() {
 
         byteArr = bytifyBigIntLE(BigInt("0x61caad4bb844cefed5f4f3718a29ea78506ad02aa2e8a56e34504e2e0cd9fa90"), 32);
         console.log(byteArr);
+
+        let byteArr1 = ethers.utils.arrayify("0x61caad4bb844cefed5f4f3718a29ea78506ad02aa2e8a56e34504e2e0cd9fa90");
+        byteArr1 = Array.from(byteArr1);
+        console.log(JSON.stringify(byteArr1));
         
         byteArr = byteArr.map((x) => {
             return x.toString(16);
